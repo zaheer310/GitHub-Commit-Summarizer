@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Turn a GitHub repository's recent commits into clear, AI-generated summaries."
+    />
+    <title>Commitly — GitHub commit summaries</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Commitly home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M7 7.5h10M7 12h6M7 16.5h10" />
+              <circle cx="18" cy="12" r="2.5" />
+            </svg>
+          </span>
+          <span>commitly<span class="brand-period">.</span></span>
+        </a>
+        <div class="topbar-note">
+          <span class="status-dot"></span>
+          <span>AI-powered commit insights</span>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="page-title">
+          <div class="eyebrow"><span></span> YOUR REPOSITORY, IN CONTEXT</div>
+          <h1 id="page-title">Catch up on every<br /><span>commit that matters.</span></h1>
+          <p class="hero-copy">
+            Paste a public GitHub repository. We’ll read its recent commit history and turn every
+            change into a clear, human-friendly summary.
+          </p>
+
+          <form id="repository-form" class="search-panel">
+            <label class="input-label" for="github-url">GITHUB REPOSITORY</label>
+            <div class="input-row">
+              <span class="input-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 6v-3.9a3.4 3.4 0 0 0-.9-2.7c3 0 6.1-1.5 6.1-6.5a5 5 0 0 0-1.3-3.5 4.7 4.7 0 0 0-.1-3.5s-1.1-.4-3.6 1.3a12.4 12.4 0 0 0-6.5 0C6.2.5 5.1.9 5.1.9A4.7 4.7 0 0 0 5 4.4a5 5 0 0 0-1.3 3.5c0 5 3.1 6.5 6.1 6.5a3.4 3.4 0 0 0-.9 2.7V22"
+                  />
+                </svg>
+              </span>
+              <input
+                id="github-url"
+                name="githubURL"
+                type="url"
+                placeholder="https://github.com/owner/repository"
+                autocomplete="url"
+                required
+                spellcheck="false"
+              />
+              <button id="submit-button" type="submit">
+                <span class="button-label">Summarise commits</span>
+                <svg class="button-arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4 10h12m-5-5 5 5-5 5" />
+                </svg>
+              </button>
+            </div>
+            <div class="form-foot">
+              <span>Public repositories · Recent commits</span>
+              <span class="keyboard-hint">No setup needed</span>
+            </div>
+          </form>
+
+          <div id="request-status" class="request-status" role="status" aria-live="polite" hidden>
+            <span class="spinner" aria-hidden="true"></span>
+            <span id="status-message"></span>
+          </div>
+          <div id="error-message" class="error-message" role="alert" hidden></div>
+        </section>
+
+        <section id="results-section" class="results-section" aria-labelledby="results-heading" hidden>
+          <div class="results-heading">
+            <div>
+              <div class="eyebrow results-eyebrow"><span></span> THE LATEST CHANGES</div>
+              <h2 id="results-heading">Commit summaries</h2>
+            </div>
+            <span id="result-count" class="result-count"></span>
+          </div>
+          <div id="commit-list" class="commit-list"></div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>Built for the curious minds behind every commit.</span>
+        <span class="footer-mono">GITHUB × GEMINI</span>
+      </footer>
+    </div>
+  </body>
+</html>
